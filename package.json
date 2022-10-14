@@ -1,0 +1,13 @@
+{
+    "name": "app-ec2-instance",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "test": "jest --coverage --forceExit"
+    },
+    "type": "module",
+    "author": "",
+    "license": "ISC"
+}
