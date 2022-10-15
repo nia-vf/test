@@ -1,9 +1,14 @@
 import http from 'http';
 import url from 'url';
 import fs from 'fs';
+import { dirname } from 'path';
+
+const __dirname = dirname(url.fileURLToPath(
+    import.meta.url))
 
 http.createServer(function(request, response) {
     var path = url.parse(request.url).pathname;
+
     switch (path) {
         case "/":
             response.writeHead(200, { "Content-Type": "text/plain" });
@@ -11,7 +16,7 @@ http.createServer(function(request, response) {
             response.end();
             break;
         case "/HtmlPage1.html":
-            fs.readFile(path, function(error, data) {
+            fs.readFile(__dirname + path, function(error, data) {
                 if (error) {
                     response.writeHead(404);
                     response.write(error);
@@ -23,8 +28,8 @@ http.createServer(function(request, response) {
                 }
             });
             break;
-        case "HtmlPage2.html":
-            fs.readFile(path, function(error, data) {
+        case "/HtmlPage2.html":
+            fs.readFile(__dirname + path, function(error, data) {
                 if (error) {
                     response.writeHead(404);
                     response.write(error);
