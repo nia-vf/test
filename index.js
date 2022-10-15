@@ -11,7 +11,7 @@ http.createServer(function(request, response) {
             response.end();
             break;
         case "/HtmlPage1.html":
-            fs.readFile(__dirname + path, function(error, data) {
+            fs.readFile(path, function(error, data) {
                 if (error) {
                     response.writeHead(404);
                     response.write(error);
@@ -24,7 +24,7 @@ http.createServer(function(request, response) {
             });
             break;
         case "HtmlPage2.html":
-            fs.readFile(__dirname + path, function(error, data) {
+            fs.readFile(path, function(error, data) {
                 if (error) {
                     response.writeHead(404);
                     response.write(error);
