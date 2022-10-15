@@ -6,7 +6,8 @@ http.createServer(function(request, response) {
     var path = url.parse(request.url).pathname;
     switch (path) {
         case "/":
-            response.writeHeader(200, { "Content-Type": "text/plain" });
+            response.writeHead(200, { "Content-Type": "text/plain" });
+            response.write("NodeJS Server Home Page.");
             response.end();
             break;
         case "/HtmlPage1.html":
