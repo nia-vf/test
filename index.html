@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEATHER API HOMEPAGE</title>
+</head>
+
+<body>
+    <h3> Get Weather Forecast for Next 7 Days </h3>
+    <form>
+        <label for="location_input">Enter Location e.g., 'London':</label><br>
+        <input type="text" id="location_input" /><br>
+        <label for="unit_type_input">Enter Unit Type e.g., 'metric':</label><br>
+        <input type="text" id="unit_type_input" /><br>
+        <label for="include_hours_input">Include Hours?:</label><br>
+        <select id="include_hours_input" name="include_hours_input">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select><br><br>
+        <button id="post"> Get Weather Data </button>
+    </form>
+    <h3> Weather Forecast - Next 7 Days </h3>
+    <form>
+        <p></p>
+        <input type="text" id="weather_forecast_response" /><br>
+    </form>
+    <script>
+        const get_button = document.getElementById("post")
+        const api_response = document.getElementById("weather_forecast_response")
+
+        const baseUrl = 'http://localhost:80/'
+
+        get_button.addEventListener('click', getWeatherData)
+
+        async function getWeatherData(e) {
+            e.preventDefault() //prevent page from refreshing
+            const input_location = document.getElementById("location_input")
+            const input_unit_type = document.getElementById("unit_type_input")
+            const input_include_hours = document.getElementById("include_hours_input")
+            if (input_location.value == '' || input_unit_type.value == '') {
+                return
+            }
+            const res = await fetch(baseUrl, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": 'application/json'
+                },
+                body: JSON.stringify({
+                    "location": input_location.value,
+                    "unitGroup": input_unit_type.value,
+                    "includeHours": input_include_hours.value
+                })
+            })
+            console.log(res)
+            const data = await res.json()
+            api_response.value = JSON.stringify(data)
+        }
+    </script>
+</body>
+
+</html>
